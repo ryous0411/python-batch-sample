@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "python-batch-sample"
+version = "0.1.0"
+description = ""
+authors = ["satoryo <ryo.sato@sportip.jp>"]
+readme = "README.md"
+packages = [{include = "python_batch_sample"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+boto3 = "^1.26.70"
+strenum = "^0.4.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
