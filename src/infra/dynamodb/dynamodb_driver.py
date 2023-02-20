@@ -1,10 +1,9 @@
 import abc
-from typing import Any
+from typing import Any, List, Dict
 
 import boto3
-from botocore.client import BaseClient
 
-dynamodb: BaseClient = boto3.client("dynamodb", endpoint_url="http://localhost:8000")
+dynamodb: Any = boto3.client("dynamodb", endpoint_url="http://localhost:8000")
 
 
 class IDynamoDBDriver(metaclass=abc.ABCMeta):
@@ -18,7 +17,7 @@ class IDynamoDBDriver(metaclass=abc.ABCMeta):
         return "title-index"
 
     @staticmethod
-    def paging_query(options) -> list[dict]:
+    def paging_query(options: Dict[str, str]) -> List[Dict[str, str]]:
 
         total_results = []
         while True:
@@ -31,5 +30,5 @@ class IDynamoDBDriver(metaclass=abc.ABCMeta):
         return total_results
 
     @staticmethod
-    def put_item(table_name: str, item: dict) -> Any:
+    def put_item(table_name: str, item: Dict[str, str]) -> Any:
         return dynamodb.put_item(TableName=table_name, Item=item)

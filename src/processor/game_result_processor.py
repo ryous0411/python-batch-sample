@@ -1,12 +1,14 @@
-from entity.game_result import GameResult
-from game_result import GameResult as EnumGameResult
-from processor.processor import IProcessor, processor_interceptor
+from typing import List
+
+from src.entity.game_result import GameResult
+from src.game_result import GameResult as EnumGameResult
+from src.processor.processor import IProcessor, processor_interceptor
 
 
 class GameResultProcessor(IProcessor):
 
     @processor_interceptor
-    def process(self, items: list[GameResult]):
+    def process(self, items: List[GameResult]) -> List[GameResult]:
         max_score: int = max(list(map(lambda x: x.score, items)))
 
         return list(map(

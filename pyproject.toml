@@ -9,7 +9,10 @@ packages = [{include = "python_batch_sample"}]
 [tool.poetry.dependencies]
 python = "^3.9"
 boto3 = "^1.26.70"
-strenum = "^0.4.9"
+pytest = "^7.2.1"
+pytest-mock = "^3.10.0"
+mypy = "^1.0.1"
+boto3-stubs = "^1.26.74"
 
 
 [build-system]

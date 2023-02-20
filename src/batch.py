@@ -1,12 +1,12 @@
-from typing import Any
+from typing import Any, Callable
 
-from processor.processor import IProcessor
-from reader.reader import IReader
-from writer.writer import IWriter
+from src.processor.processor import IProcessor
+from src.reader.reader import IReader
+from src.writer.writer import IWriter
 
 
-def batch_interceptor(func):
-    def wrapper(*args, **kwargs):
+def batch_interceptor(func: Callable[[Any, Any], Any]) -> Callable[[Any, Any], Any]:
+    def wrapper(*args: Any, **kwargs: Any) -> None:
         print("--Batch Start--")
         func(*args, **kwargs)
         print("--Batch End--")
@@ -22,7 +22,7 @@ class Batch:
         self._writer = writer
 
     @batch_interceptor
-    def execute(self, args) -> None:
-        extracted_item: Any = self._reader.read(args)
+    def execute(self, *args: str) -> None:
+        extracted_item: Any = self._reader.read(*args)
         processed_item: Any = self._processor.process(extracted_item)
         self._writer.write(processed_item)

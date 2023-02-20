@@ -1,7 +1,8 @@
 import abc
+from typing import List, Dict, Any
 
-from entity.game_result import GameResult
-from infra.dynamodb.game_result_driver import GameResultDriver
+from src.entity.game_result import GameResult
+from src.infra.dynamodb.game_result_driver import GameResultDriver
 
 
 class IGameResultRepository(metaclass=abc.ABCMeta):
@@ -15,8 +16,8 @@ class IGameResultRepository(metaclass=abc.ABCMeta):
 
 class GameResultRepository(IGameResultRepository, GameResultDriver):
 
-    def find_all_by_title(self, title: str) -> list[GameResult]:
-        game_scores: list[dict] = self.query_by_title(title)
+    def find_all_by_title(self, title: str) -> List[GameResult]:
+        game_scores: List[Dict[str, Any]] = self.query_by_title(title)
 
         return list(
             map(lambda x: GameResult(
@@ -28,7 +29,7 @@ class GameResultRepository(IGameResultRepository, GameResultDriver):
         )
 
     def upsert(self, game_result: GameResult) -> None:
-        item = {
+        item: Dict[str, Any] = {
             "user_id": {"S": game_result.user_id},
             "title": {"S": game_result.title},
             "score": {"N": str(game_result.score)},

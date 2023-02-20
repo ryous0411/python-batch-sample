@@ -22,5 +22,5 @@ class GameResult:
     def result(self) -> str:
         return self._result
 
-    def is_won(self, max_score: int):
+    def is_won(self, max_score: int) -> bool:
         return True if self._score == max_score else False

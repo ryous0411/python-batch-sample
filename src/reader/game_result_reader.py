@@ -1,17 +1,19 @@
-from entity.game_result import GameResult
-from game_title import GameTitle
-from reader.reader import IReader, reader_interceptor
-from repository.game_result_repository import GameResultRepository
+from typing import List, Any
+
+from src.entity.game_result import GameResult
+from src.game_title import GameTitle
+from src.reader.reader import IReader, reader_interceptor
+from src.repository.game_result_repository import GameResultRepository
 
 
 class GameResultReader(IReader, GameResultRepository):
 
     @reader_interceptor
-    def read(self, args) -> list[GameResult]:
+    def read(self, args: str) -> List[GameResult]:
 
         try:
 
-            game_title = args[1]
+            game_title: str = args[1]
 
             if not GameTitle.exists(game_title):
                 raise GameTitleNotFoundError()
@@ -23,10 +25,10 @@ class GameResultReader(IReader, GameResultRepository):
 
 
 class BatchArgsRequiredError(IndexError):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(args, kwargs)
 
 
 class GameTitleNotFoundError(ValueError):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(args, kwargs)

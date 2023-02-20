@@ -1,9 +1,9 @@
 import abc
-from typing import Any
+from typing import Any, Callable
 
 
-def writer_interceptor(func):
-    def wrapper(*args, **kwargs):
+def writer_interceptor(func: Callable[[Any, Any], Any]) -> Callable[[Any, Any], Any]:
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
         print("--Writer Start--")
         result: Any = func(*args, **kwargs)
         print("--Writer End--")
@@ -13,5 +13,5 @@ def writer_interceptor(func):
 
 
 class IWriter(metaclass=abc.ABCMeta):
-    def write(self, item: Any):
+    def write(self, item: Any) -> None:
         raise NotImplementedError()

@@ -1,6 +1,6 @@
-from entity.game_result import GameResult
-from repository.game_result_repository import GameResultRepository
-from writer.writer import IWriter, writer_interceptor
+from src.entity.game_result import GameResult
+from src.repository.game_result_repository import GameResultRepository
+from src.writer.writer import IWriter, writer_interceptor
 
 
 class GameResultWriter(IWriter, GameResultRepository):

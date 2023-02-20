@@ -1,14 +1,15 @@
-from strenum import StrEnum
+from enum import Enum
+from typing import List
 
 
-class GameTitle(StrEnum):
+class GameTitle(Enum):
     GALAXY_INVADERS = "galaxy_invaders"
     METEOR_BLASTERS = "meteor_blasters"
     STARSHIP_X = "starship_x"
 
     @classmethod
-    def values(cls) -> list:
-        return list(map(lambda c: c.value, cls))
+    def values(cls) -> List[str]:
+        return [v.value for v in GameTitle]
 
     @classmethod
     def exists(cls, title: str) -> bool:
